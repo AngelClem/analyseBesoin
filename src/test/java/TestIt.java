@@ -1,8 +1,7 @@
 public class TestIt {
 
-    public int testMachineACafe(){
-        //
-    }
+
+  //  public void "Quand on met 40cts ALORS un café coule"
 
 
 }
