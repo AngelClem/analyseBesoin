@@ -106,5 +106,12 @@ public class Machine {
     }
 
 
-
+    public void InsérerMonnaie(int nombreDeCentimes)
+    {
+        if(coffeeAvailable && (cupAvailable || mugDetected))
+        {
+            ArgentEncaisseEnCentimes = nombreDeCentimes;
+            numberOfCoffeesServed = 1;
+        }
+    }
 }
