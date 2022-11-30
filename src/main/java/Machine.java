@@ -6,9 +6,9 @@ public class Machine {
     private boolean cupAvailable = true;
 
     public int numberOfCoffeesServed;
-    public int ArgentEncaisseEnCentimes;
+    public int moneyCollected;
     public boolean mugDetected;
-    public int cutNumber;
+    public int cupNumber;
 
     public Machine() {
     }
@@ -41,64 +41,61 @@ public class Machine {
         return numberOfCoffeesServed;
     }
 
-    public int getArgentEncaisseEnCentimes() {
-        return ArgentEncaisseEnCentimes;
+    public int getMoneyCollected() {
+        return moneyCollected;
     }
 
-    public void setArgentEncaisseEnCentimes(int argentEncaisseEnCentimes) {
-        ArgentEncaisseEnCentimes = argentEncaisseEnCentimes;
+    public void setMoneyCollected(int moneyCollected) {
+        this.moneyCollected = moneyCollected;
     }
 
-    public boolean isTasseDetectee() {
+    public boolean isMugDetected() {
         return mugDetected;
     }
 
-    public void setTasseDetectee(boolean tasseDetectee) {
-        mugDetected = tasseDetectee;
+    public void setMugDetected(boolean mugDetected) {
+        this.mugDetected = mugDetected;
     }
 
-    public int getCutNumber() {
-        return cutNumber;
+    public int getCupNumber() {
+        return cupNumber;
     }
 
-    public void setCutNumber(int cutNumber) {
-        this.cutNumber = cutNumber;
+    public void setCupNumber(int cutNumber) {
+        this.cupNumber = cutNumber;
     }
 
     public void setNumberOfCoffeesServed(int nbrCafeServis) {
         this.numberOfCoffeesServed = nbrCafeServis;
     }
 
-    ////////////// FUNCTION / VOID ///////////////////////////////////
+    ////////////// FUNCTION / VOID //////////////////////////////////
 
-    public int getMonnaieActuelle() {
-        return actualMoney;
+    public void serveCoffee() {
+
+        if ( this.cupNumber <= 0 ) {
+            //throw new Exception("There are no more cups");
+        }
+
+        this.numberOfCoffeesServed += 1;
+        this.cupNumber -= 1;
+        this.moneyCollected += this.actualMoney;
+        this.actualMoney = 0;
     }
 
-    public void setMonnaieActuelle(int monnaieActuelle) {
-        this.actualMoney = monnaieActuelle;
+    public void insertMoney(int valueInCents) {
+        this.moneyCollected += valueInCents;
     }
 
-    public int serveCoffee() {
-        this.setNumberOfCoffeesServed(this.getNumberOfCoffeesServed()+1);
-        return this.getNumberOfCoffeesServed();
-    }
-
-    public void insererMonnaie(int nbrCentime) {
-        setMonnaieActuelle(nbrCentime);
-    }
-
-    public int cancel() {
-        int moneyToBeReturned = this.getMonnaieActuelle();
-        this.setMonnaieActuelle(0);
-        return moneyToBeReturned;
+    public void cancel() {
+        this.actualMoney = 0;
     }
 
     public void cancelCafe(){
         setNumberOfCoffeesServed(this.getNumberOfCoffeesServed()-1);
     }
 
-    public void ViderStockCafé()
+    public void ViderStockCafe()
     {
         coffeeAvailable = false;
     }
@@ -108,12 +105,6 @@ public class Machine {
         cupAvailable = false;
     }
 
-    public void InsérerMonnaie(int nombreDeCentimes)
-    {
-        if(coffeeAvailable && (cupAvailable || mugDetected))
-        {
-            ArgentEncaisseEnCentimes = nombreDeCentimes;
-            numberOfCoffeesServed = 1;
-        }
-    }
+
+
 }
